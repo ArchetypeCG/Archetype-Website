@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Archetype Coaching Group | Premium Coaching, Consultancy & Training</title>
+  <meta name="description" content="Archetype Coaching Group provides coaching delivery, development consultancy, training reviews, skills audits, diagnostic assessments and apprenticeship support for individuals, teams and organisations." />
+  <style>
+    :root{
+      --black:#050505;
+      --white:#ffffff;
+      --soft:#f4f4f4;
+      --grey:#5d5d5d;
+      --line:rgba(255,255,255,.16);
+      --line-dark:rgba(0,0,0,.14);
+      --shadow:0 34px 120px rgba(0,0,0,.34);
+      --serif:Georgia,'Times New Roman',serif;
+      --sans:Inter,Arial,sans-serif;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:var(--black);color:var(--white);font-family:var(--sans);line-height:1.55;overflow-x:hidden}
+    body.menu-open{overflow:hidden}
+    a{color:inherit;text-decoration:none}
+    button,input,textarea,select{font:inherit}
+    section{scroll-margin-top:40px;padding:110px 0}
+    .container{width:min(1180px,calc(100% - 48px));margin:0 auto}
+    .noise{position:fixed;inset:0;pointer-events:none;z-index:100;opacity:.05;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+
+    .logo-original{display:inline-flex;align-items:center;gap:14px;letter-spacing:-.045em;white-space:nowrap}
+    .logo-original:before{content:"";width:1px;height:64px;background:currentColor;display:block;opacity:.85}
+    .logo-original .logo-word{font-family:var(--serif);font-weight:900;font-size:clamp(1.2rem,2vw,1.78rem);line-height:1}
+    .topbar{position:fixed;top:0;left:0;right:0;z-index:80;padding:24px clamp(18px,4vw,52px);display:flex;align-items:center;justify-content:space-between;mix-blend-mode:difference;color:white}
+    .top-actions{display:flex;align-items:center;gap:12px}
+    .circle-link,.menu-btn{height:52px;border-radius:999px;border:1px solid rgba(255,255,255,.7);background:transparent;color:white;display:grid;place-items:center;font-weight:900;cursor:pointer;transition:.3s ease}
+    .circle-link{width:52px}.menu-btn{padding:0 20px;gap:10px;display:inline-flex}
+    .circle-link:hover,.menu-btn:hover{background:white;color:black;transform:translateY(-2px)}
+    .menu-lines{width:18px;display:grid;gap:4px}.menu-lines i{height:1px;background:currentColor;display:block}
+
+    .side-index{position:fixed;left:24px;top:50%;transform:translateY(-50%);z-index:70;display:grid;gap:10px;mix-blend-mode:difference;color:white}
+    .side-index a{width:44px;height:44px;border:1px solid rgba(255,255,255,.35);border-radius:50%;display:grid;place-items:center;font-size:.72rem;font-weight:900;opacity:.72;transition:.25s}
+    .side-index a:hover{opacity:1;background:#fff;color:#000;transform:translateX(6px)}
+
+    .menu-overlay{position:fixed;inset:0;z-index:90;background:rgba(5,5,5,.96);transform:translateY(-100%);transition:transform .65s cubic-bezier(.86,0,.07,1);display:grid;place-items:center;padding:90px 24px;color:#fff}
+    .menu-open .menu-overlay{transform:translateY(0)}
+    .mega{width:min(1120px,100%);display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:end}
+    .mega h2{font-family:var(--serif);font-size:clamp(3.1rem,9vw,7.8rem);line-height:.88;letter-spacing:-.08em;margin:0}
+    .mega-panel{display:grid;gap:14px}
+    .mega-card{display:grid;grid-template-columns:70px 1fr auto;gap:18px;align-items:center;padding:18px;border:1px solid rgba(255,255,255,.16);border-radius:24px;background:rgba(255,255,255,.04);transition:.28s}
+    .mega-card:hover{background:#fff;color:#000;transform:translateX(10px)}
+    .mega-card span{font-family:var(--serif);font-size:1.5rem}.mega-card small{display:block;opacity:.62}
+    .close-menu{position:absolute;right:32px;top:28px;background:#fff;color:#000;border:0;border-radius:999px;padding:14px 20px;font-weight:900;cursor:pointer}
+
+    h1,h2,h3,h4,p{margin:0}h1,h2,h3{font-family:var(--serif);font-weight:400;letter-spacing:-.075em}h1{font-size:clamp(4rem,10.7vw,11.7rem);line-height:.82;max-width:1040px}h2{font-size:clamp(3rem,6.8vw,7rem);line-height:.88}h3{font-size:clamp(2rem,3vw,3.2rem);line-height:.95}
+    .btn{border:1px solid currentColor;border-radius:999px;padding:15px 24px;background:white;color:black;font-weight:950;display:inline-flex;align-items:center;justify-content:center;gap:12px;transition:.25s;cursor:pointer}.btn:hover{transform:translateY(-3px);box-shadow:0 20px 50px rgba(255,255,255,.14)}.btn.dark{background:#000;color:#fff}.btn.transparent{background:transparent;color:white}
+    .eyebrow{display:flex;align-items:center;gap:14px;text-transform:uppercase;letter-spacing:.25em;font-size:.72rem;font-weight:950;color:inherit;opacity:.62;margin-bottom:18px}.eyebrow:before{content:"";width:46px;height:1px;background:currentColor}
+    .light{background:#fff;color:#000}.dark-section{background:#050505;color:#fff}.grid{display:grid;gap:18px}.four{grid-template-columns:repeat(4,1fr)}
+
+    .hero{min-height:100vh;position:relative;display:grid;align-items:end;overflow:hidden}.hero:before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,.82) 0%,rgba(0,0,0,.42) 48%,rgba(0,0,0,.8) 100%),url('https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1800&q=85') center/cover;filter:grayscale(1);transform:scale(1.03)}.hero:after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 58% 38%,transparent 0 21%,rgba(0,0,0,.38) 48%,rgba(0,0,0,.82) 100%)}.hero-inner{position:relative;z-index:2;padding:170px 0 80px}.intro-line{display:flex;align-items:center;gap:18px;text-transform:uppercase;letter-spacing:.22em;font-size:.72rem;font-weight:900;color:rgba(255,255,255,.74);margin-bottom:28px}.intro-line:before{content:"";width:72px;height:1px;background:rgba(255,255,255,.7)}.lead{font-size:clamp(1.1rem,1.8vw,1.45rem);color:rgba(255,255,255,.78);max-width:760px}.hero-copy{display:grid;grid-template-columns:.72fr .28fr;gap:42px;margin-top:34px;align-items:end}.button-row{display:flex;gap:12px;flex-wrap:wrap;margin-top:34px}.hero-badge{border:1px solid rgba(255,255,255,.28);border-radius:28px;padding:22px;background:rgba(255,255,255,.06);backdrop-filter:blur(16px)}.hero-badge strong{font-family:var(--serif);font-size:2.1rem}.hero-badge p{color:rgba(255,255,255,.68);margin-top:8px;font-size:.95rem}
+    .marquee{border-block:1px solid rgba(255,255,255,.16);background:#080808;overflow:hidden}.marquee-track{display:flex;gap:34px;white-space:nowrap;animation:move 28s linear infinite;padding:18px 0;text-transform:uppercase;letter-spacing:.18em;font-weight:900;font-size:.75rem}.marquee-track span{opacity:.75}.marquee-track span:after{content:"·";padding-left:34px;opacity:.35}@keyframes move{to{transform:translateX(-50%)}}
+
+    .about-section{background:#fff;color:#000;position:relative;overflow:hidden;padding:140px 0}.about-wide{width:min(1680px,calc(100% - 72px));margin:0 auto}.about-top{display:grid;grid-template-columns:.95fr 1.05fr;gap:clamp(48px,7vw,130px);align-items:end;margin-bottom:70px}.about-intro h2{font-size:clamp(3.5rem,7.4vw,8.8rem);max-width:880px}.about-summary{display:grid;gap:24px;border-left:1px solid rgba(0,0,0,.16);padding-left:clamp(28px,4vw,70px)}.about-summary p{color:#4f4f4f;font-size:clamp(1.05rem,1.25vw,1.28rem);max-width:760px}.about-showcase{display:grid;grid-template-columns:.95fr 1.05fr;gap:clamp(44px,6vw,110px);align-items:stretch}.about-media{position:relative;min-height:760px;background:#050505;color:#fff;overflow:hidden;box-shadow:var(--shadow)}.about-media:before{content:"";position:absolute;inset:0;background:linear-gradient(rgba(0,0,0,.08),rgba(0,0,0,.66)),url('https://images.unsplash.com/photo-1573497491208-6b1acb260507?auto=format&fit=crop&w=1700&q=85') center/cover;filter:grayscale(1)}.about-media:after{content:"";position:absolute;inset:26px;border:1px solid rgba(255,255,255,.36)}.about-media-caption{position:absolute;left:44px;right:44px;bottom:44px;z-index:2}.about-media-caption strong{display:block;font-family:var(--serif);font-size:clamp(2.6rem,4.8vw,6rem);line-height:.88;font-weight:400;letter-spacing:-.075em;max-width:720px}.about-media-caption p{margin-top:22px;color:rgba(255,255,255,.72);max-width:520px;font-size:1.05rem}.about-side{display:grid;gap:26px}.about-copy-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}.about-copy-card{border:1px solid rgba(0,0,0,.14);padding:34px;background:#f6f6f6;min-height:260px;display:flex;flex-direction:column;justify-content:flex-end}.about-copy-card.dark{background:#050505;color:#fff}.about-copy-card h3{font-size:clamp(2.2rem,3.2vw,4rem)}.about-copy-card p{margin-top:22px;color:inherit;opacity:.68}.about-actions{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}.about-action{border:1px solid rgba(0,0,0,.18);background:#fff;color:#000;padding:26px;min-height:210px;display:flex;flex-direction:column;gap:10px;transition:.28s}.about-action:hover{background:#000;color:#fff;transform:translateY(-5px)}.about-action strong{font-family:var(--serif);font-size:clamp(1.7rem,2vw,2.4rem);line-height:.95;letter-spacing:-.055em;font-weight:400}.about-action p{opacity:.7;font-size:.97rem;line-height:1.42;margin-top:4px;max-width:95%}.client-promise{border:1px solid rgba(0,0,0,.16);padding:clamp(28px,3vw,48px);background:#000;color:#fff;display:grid;grid-template-columns:.32fr .68fr;gap:34px;align-items:center}.client-promise strong{font-family:var(--serif);font-size:clamp(2.4rem,3.7vw,4.6rem);line-height:.88;font-weight:400;letter-spacing:-.07em}.client-promise p{color:rgba(255,255,255,.72);font-size:1.08rem;max-width:850px}
+
+    #services{min-height:100vh;display:grid;align-items:center;padding:92px 0}.services-intro{max-width:980px;margin-bottom:34px}.services-intro h2{max-width:850px}.services-intro p{max-width:720px;color:rgba(255,255,255,.68);font-size:1.06rem;margin-top:22px}.service-card{position:relative;min-height:330px;border:1px solid rgba(255,255,255,.18);padding:26px;background:#0b0b0b;overflow:hidden;display:flex;flex-direction:column;justify-content:space-between;transition:.35s}.service-card:before{content:attr(data-number);position:absolute;right:18px;top:10px;font-family:var(--serif);font-size:5.6rem;line-height:1;color:rgba(255,255,255,.055)}.service-card:hover{background:#fff;color:#000;transform:translateY(-8px)}.service-card h3{font-size:clamp(1.8rem,2.3vw,2.45rem);max-width:260px}.service-card p{opacity:.7;margin-top:16px;line-height:1.42;font-size:.97rem}.service-note{display:block;margin-top:14px;padding-top:14px;border-top:1px solid currentColor;opacity:.54;font-size:.76rem;font-weight:900;text-transform:uppercase;letter-spacing:.12em}.arrow{width:48px;height:48px;border:1px solid currentColor;border-radius:50%;display:grid;place-items:center;font-size:1.15rem}
+
+    .service-detail{display:grid;grid-template-columns:.42fr .58fr;gap:44px}.nav-panel{position:sticky;top:105px;border:1px solid rgba(0,0,0,.18);padding:28px;background:#fff;color:#000}.nav-panel h3{font-size:2.2rem}.nav-panel a{display:flex;justify-content:space-between;gap:16px;border-bottom:1px solid rgba(0,0,0,.12);padding:16px 0;font-weight:900}.detail-stack{display:grid;gap:20px}.detail-box{background:#fff;color:#000;border:1px solid rgba(0,0,0,.1);padding:34px;min-height:220px}.detail-box h3{font-size:2rem}.detail-box p{margin-top:14px;color:#555}.detail-box ul{margin:18px 0 0;padding:0;list-style:none;display:grid;gap:9px}.detail-box li{position:relative;padding-left:22px;color:#333;font-size:.96rem}.detail-box li:before{content:"";position:absolute;left:0;top:.68em;width:8px;height:1px;background:#000}
+
+    .method-hero{position:relative;overflow:hidden;border:1px solid rgba(255,255,255,.18);background:linear-gradient(135deg,#080808,#181818 55%,#050505);padding:54px;margin-bottom:34px;box-shadow:var(--shadow)}.method-hero-content{position:relative;z-index:2;display:grid;grid-template-columns:1fr .75fr;gap:40px;align-items:end}.method-hero p{color:rgba(255,255,255,.72);font-size:1.08rem}.method-badges{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.method-badge{border:1px solid rgba(255,255,255,.16);padding:18px;background:rgba(255,255,255,.04)}.method-badge strong{display:block;font-family:var(--serif);font-size:1.65rem;font-weight:400}.method-badge span{display:block;color:rgba(255,255,255,.6);font-size:.86rem;margin-top:8px}.method-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}.method-card{min-height:340px;border:1px solid rgba(255,255,255,.16);padding:28px;background:rgba(255,255,255,.035);display:flex;flex-direction:column;justify-content:space-between;transition:.3s}.method-card:hover{background:#fff;color:#000;transform:translateY(-8px)}.method-card:hover p,.method-card:hover .method-no{color:rgba(0,0,0,.62)}.method-no{font-family:var(--serif);font-size:4.5rem;line-height:.8;color:rgba(255,255,255,.26);letter-spacing:-.08em}.method-card h3{font-size:2.35rem}.method-card p{color:rgba(255,255,255,.65);margin-top:18px}.method-flow{margin-top:18px;border:1px solid rgba(255,255,255,.14);display:grid;grid-template-columns:repeat(4,1fr)}.flow-item{padding:20px;border-right:1px solid rgba(255,255,255,.14)}.flow-item:last-child{border-right:0}.flow-item small{display:block;text-transform:uppercase;letter-spacing:.18em;font-weight:900;color:rgba(255,255,255,.48);font-size:.68rem}.flow-item strong{display:block;margin-top:7px}.method-note{margin-top:26px;display:grid;grid-template-columns:.72fr .28fr;gap:20px;align-items:center;border-top:1px solid rgba(255,255,255,.16);padding-top:26px}.method-note p{color:rgba(255,255,255,.68)}
+    .quote-band{background:#fff;color:#000;padding:88px 0}.quote-band blockquote{margin:0;font-family:var(--serif);font-size:clamp(2.7rem,6vw,6.8rem);line-height:.9;letter-spacing:-.085em}.quote-band p{margin-top:28px;color:#555}.split{display:grid;grid-template-columns:.9fr 1.1fr;gap:64px;align-items:center}.copy p{color:inherit;opacity:.68;font-size:1.08rem}.image-frame{min-height:580px;position:relative;overflow:hidden;background:center/cover;filter:grayscale(1);box-shadow:var(--shadow)}.image-frame:after{content:"";position:absolute;inset:20px;border:1px solid rgba(255,255,255,.36)}.image-frame.team{background-image:linear-gradient(rgba(0,0,0,.05),rgba(0,0,0,.38)),url('https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=1400&q=85')}.statement{border-left:1px solid currentColor;margin-top:34px;padding-left:26px;font-family:var(--serif);font-size:clamp(1.4rem,2.4vw,2.2rem);line-height:1.12;letter-spacing:-.04em;color:inherit}
+    .faq{border-top:1px solid rgba(0,0,0,.16)}details{border-bottom:1px solid rgba(0,0,0,.16);padding:24px 0}summary{font-family:var(--serif);font-size:1.7rem;letter-spacing:-.04em;cursor:pointer}details p{margin-top:12px;color:#555;max-width:820px}.section-head{display:grid;grid-template-columns:.9fr 1.1fr;gap:58px;align-items:end;margin-bottom:54px}.section-head p{color:inherit;opacity:.68;font-size:1.08rem}
+
+    .contact-page{position:relative;background:#050505;color:#fff;overflow:hidden}.contact-page:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 82% 18%,rgba(255,255,255,.12),transparent 24%),linear-gradient(135deg,#050505,#111 48%,#000);pointer-events:none}.contact-wrap{position:relative;z-index:2;display:grid;grid-template-columns:.82fr 1.18fr;gap:52px;align-items:stretch}.contact-card{border:1px solid rgba(255,255,255,.2);padding:44px;background:rgba(255,255,255,.04);display:flex;flex-direction:column;justify-content:space-between;min-height:620px}.contact-card h2{font-size:clamp(3.2rem,6.8vw,7.2rem)}.contact-card p{color:rgba(255,255,255,.68);margin-top:22px;font-size:1.08rem;max-width:560px}.contact-promise{margin-top:34px;border-top:1px solid rgba(255,255,255,.18);padding-top:28px;display:grid;gap:14px}.contact-promise div{display:flex;gap:14px;align-items:flex-start}.contact-promise span{width:28px;height:28px;border:1px solid rgba(255,255,255,.26);border-radius:50%;display:grid;place-items:center;flex:0 0 28px;font-size:.75rem}.contact-promise strong{display:block}.contact-promise small{display:block;color:rgba(255,255,255,.58);margin-top:4px;line-height:1.45}.contact-list{display:grid;gap:12px;margin-top:34px}.contact-list a{border:1px solid rgba(255,255,255,.18);padding:16px 18px;display:flex;justify-content:space-between}.contact-list a:hover{background:white;color:black}.contact-form-panel{background:#fff;color:#000;padding:44px;display:grid;gap:28px}.contact-form-panel h3{font-size:clamp(2.4rem,4vw,4.6rem)}.contact-form-panel p{color:#555;max-width:650px}.contact-form{display:grid;gap:16px}.contact-form label{display:block;font-size:.72rem;text-transform:uppercase;letter-spacing:.18em;font-weight:900;color:#555}.field{display:grid;gap:6px}input,textarea,select{width:100%;border:0;border-bottom:1px solid rgba(0,0,0,.24);padding:14px 0 16px;background:transparent;color:#000;outline:none}textarea{min-height:160px;resize:vertical}.form-row{display:grid;grid-template-columns:1fr 1fr;gap:20px}.form-help{font-size:.9rem;color:#555;line-height:1.5}.direct-email{border:1px solid rgba(0,0,0,.14);padding:18px;display:flex;justify-content:space-between;gap:18px;align-items:center}.direct-email a{font-weight:950;text-decoration:underline}
+    .footer{padding:64px 0;background:#000;border-top:1px solid rgba(255,255,255,.14)}.footer-grid{display:grid;grid-template-columns:1.2fr repeat(3,1fr);gap:42px}.footer h4{font-family:var(--serif);font-size:1.4rem}.footer a,.footer p{display:block;color:rgba(255,255,255,.62);margin:9px 0}.footer-bottom{border-top:1px solid rgba(255,255,255,.14);margin-top:44px;padding-top:24px;display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap}
+
+    @media(max-width:1200px){.about-top,.about-showcase{grid-template-columns:1fr}.about-summary{border-left:0;border-top:1px solid rgba(0,0,0,.16);padding-left:0;padding-top:34px}.about-media{min-height:620px}.about-actions{grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:1000px){.side-index{display:none}.hero-copy,.section-head,.split,.service-detail,.contact-wrap,.method-hero-content,.method-note{grid-template-columns:1fr}.four,.footer-grid,.method-grid,.method-flow{grid-template-columns:repeat(2,1fr)}#services{min-height:auto}.hero-inner{padding-top:150px}.nav-panel{position:static}.mega{grid-template-columns:1fr}.topbar{padding:18px}.circle-link{display:none}}
+    @media(max-width:680px){.container{width:min(100% - 32px,1180px)}.logo-original:before{height:44px}.logo-original .logo-word{font-size:1.05rem}.menu-btn{height:46px;padding:0 14px}.hero-inner{padding:130px 0 58px}h1{font-size:4.3rem}.hero-badge{display:none}.button-row{display:grid}.four,.footer-grid,.form-row,.about-actions,.about-copy-grid,.client-promise,.method-badges,.method-grid,.method-flow{grid-template-columns:1fr}.service-card{min-height:290px}.image-frame{min-height:410px}.mega-card{grid-template-columns:44px 1fr}.mega-card small{display:none}section{padding:82px 0}.quote-band{padding:64px 0}.method-hero{padding:30px}.about-section{padding:90px 0}.about-wide{width:min(100% - 32px,1680px)}.about-media{min-height:480px}.about-media-caption{left:28px;right:28px;bottom:28px}.about-action{min-height:190px;gap:8px}.about-copy-card{min-height:220px}.flow-item{border-right:0;border-bottom:1px solid rgba(255,255,255,.14)}.flow-item:last-child{border-bottom:0}.contact-card{min-height:auto}.contact-card,.contact-form-panel{padding:28px}.direct-email{display:block}.direct-email a{display:block;margin-top:8px}}
+  </style>
+</head>
+<body>
+  <div class="noise"></div>
+  <header class="topbar" aria-label="Primary navigation">
+    <a class="logo-original" href="#home" aria-label="Archetype Coaching Group home"><span class="logo-word">Archetype Coaching Group</span></a>
+    <div class="top-actions">
+      <a class="circle-link" href="mailto:enquiry@archetypecoachinggroup.com?subject=Website%20Enquiry" aria-label="Email">✉</a>
+      <a class="circle-link" href="#contact" aria-label="Contact">↗</a>
+      <button class="menu-btn" type="button" aria-label="Open menu" onclick="document.body.classList.add('menu-open')"><span>Menu</span><span class="menu-lines"><i></i><i></i></span></button>
+    </div>
+  </header>
+
+  <nav class="side-index" aria-label="Section index">
+    <a href="#home">01</a><a href="#about">02</a><a href="#services">03</a><a href="#method">04</a><a href="#contact">05</a>
+  </nav>
+
+  <div class="menu-overlay" role="dialog" aria-modal="true" aria-label="Website menu">
+    <button class="close-menu" type="button" onclick="document.body.classList.remove('menu-open')">Close</button>
+    <div class="mega">
+      <div><div class="eyebrow">Navigation</div><h2>Choose your path.</h2></div>
+      <div class="mega-panel">
+        <a class="mega-card" href="#about"><span>01</span><div><strong>About</strong><small>Purpose, approach and client promise</small></div><b>→</b></a>
+        <a class="mega-card" href="#services"><span>02</span><div><strong>Services</strong><small>Consultancy, training, apprenticeships and coaching</small></div><b>→</b></a>
+        <a class="mega-card" href="#method"><span>03</span><div><strong>The Method</strong><small>Free consultation, review, audit and diagnostics</small></div><b>→</b></a>
+        <a class="mega-card" href="#faq"><span>04</span><div><strong>FAQs</strong><small>Common questions before getting in touch</small></div><b>→</b></a>
+        <a class="mega-card" href="#contact"><span>05</span><div><strong>Contact</strong><small>Free consultation and enquiries</small></div><b>→</b></a>
+      </div>
+    </div>
+  </div>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="container hero-inner">
+        <div class="intro-line">Coaching Delivery and Development Consultancy</div>
+        <h1>Be future-proof and future-ready.</h1>
+        <div class="hero-copy">
+          <div><p class="lead">Premium coaching, consultancy and development support for people and organisations who want clarity, confidence and visible progress.</p><div class="button-row"><a class="btn" href="#contact">Book a free consultation →</a><a class="btn transparent" href="#method">See the method</a></div></div>
+          <aside class="hero-badge"><strong>Free</strong><p>Begin with a focused consultation to understand your goals, challenges and best next step.</p></aside>
+        </div>
+      </div>
+    </section>
+
+    <div class="marquee" aria-hidden="true"><div class="marquee-track"><span>Free Consultation</span><span>Training Review</span><span>Skills Audit</span><span>Diagnostic Assessments</span><span>Coaching</span><span>Consultancy</span><span>Apprenticeships</span><span>Progress</span><span>Free Consultation</span><span>Training Review</span><span>Skills Audit</span><span>Diagnostic Assessments</span></div></div>
+
+    <section class="about-section" id="about">
+      <div class="about-wide">
+        <div class="about-top">
+          <div class="about-intro"><div class="eyebrow">About</div><h2>Clarity first. Development second. Impact always.</h2></div>
+          <div class="about-summary"><p>Archetype Coaching Group works with individuals, teams and businesses who want development to feel purposeful, premium and connected to real outcomes. We help clients understand what is happening now, what needs to improve and what support will create the strongest impact.</p><p>The work is built around listening, diagnosis and practical action. This means clients are not pushed into a standard programme. Instead, we begin by understanding the person, team or business need, then design the right route forward.</p><div class="client-promise"><strong>Our client promise</strong><p>We help you make confident decisions before you invest in development. The aim is always to understand the need first, then recommend the right support — not simply sell a programme.</p></div></div>
+        </div>
+        <div class="about-showcase">
+          <aside class="about-media"><div class="about-media-caption"><strong>Development that feels considered, not generic.</strong><p>Archetype Coaching Group helps people and organisations make confident decisions before investing in training, coaching or consultancy.</p></div></aside>
+          <div class="about-side">
+            <div class="about-copy-grid"><article class="about-copy-card dark"><h3>For businesses</h3><p>We support employers with training reviews, skills audits, diagnostic assessments, management development, apprenticeship support and consultancy that improves performance and confidence.</p></article><article class="about-copy-card"><h3>For individuals</h3><p>We help individuals reflect, reset and move forward through coaching, confidence-building, career direction, skills development and structured personal action planning.</p></article></div>
+            <div class="about-actions"><a class="about-action" href="#contact"><strong>Free consultation</strong><p>A no-pressure first conversation to explore your goals and identify the most useful next step.</p></a><a class="about-action" href="#method"><strong>Training review</strong><p>A focused look at existing training and development activity to improve quality and impact.</p></a><a class="about-action" href="#method"><strong>Skills audit</strong><p>A clear review of capability, strengths and development gaps across individuals or teams.</p></a><a class="about-action" href="#method"><strong>Diagnostic assessments</strong><p>Structured diagnostics to understand needs before recommending coaching, training or consultancy.</p></a></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="dark-section" id="services">
+      <div class="container">
+        <div class="services-intro">
+          <div class="eyebrow">Services</div>
+          <h2>Four focused ways to move forward.</h2>
+          <p>Each service is clear, practical and needs-led. Start with one area or combine services after a free consultation, training review, skills audit or diagnostic assessment.</p>
+        </div>
+        <div class="grid four">
+          <a class="service-card" href="#consultancy" data-number="01"><div><h3>Development Consultancy</h3><p>Review systems, improve processes and turn strategic ideas into workable action.</p><span class="service-note">Business improvement</span></div><span class="arrow">→</span></a>
+          <a class="service-card" href="#training" data-number="02"><div><h3>Training & Coaching Delivery</h3><p>Practical workshops and coaching sessions built around real workplace needs.</p><span class="service-note">Team development</span></div><span class="arrow">→</span></a>
+          <a class="service-card" href="#apprenticeships" data-number="03"><div><h3>Apprenticeship Support</h3><p>Portfolio, review, gateway and assessment support for learners and employers.</p><span class="service-note">Learner progress</span></div><span class="arrow">→</span></a>
+          <a class="service-card" href="#life" data-number="04"><div><h3>Life Coaching</h3><p>One-to-one coaching for confidence, direction, self-awareness and action.</p><span class="service-note">Personal clarity</span></div><span class="arrow">→</span></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="light" id="consultancy"><div class="container service-detail"><aside class="nav-panel"><h3>Service navigation</h3><a href="#consultancy"><span>Development Consultancy</span><span>01</span></a><a href="#training"><span>Training & Coaching</span><span>02</span></a><a href="#apprenticeships"><span>Apprenticeship Support</span><span>03</span></a><a href="#life"><span>Life Coaching</span><span>04</span></a><a href="#contact"><span>Contact</span><span>→</span></a></aside><div class="detail-stack"><div class="eyebrow">Development Consultancy</div><h2>Structure that makes change feel possible.</h2><article class="detail-box"><h3>Review current practice</h3><p>Understand what is working, what is causing friction and where improvement would have the strongest impact.</p><ul><li>Current practice review</li><li>Process and workflow mapping</li><li>Training and development gap identification</li></ul></article><article class="detail-box"><h3>Create practical solutions</h3><p>Develop tools, resources and plans that help people take action rather than simply talk about change.</p><ul><li>Action plans and improvement routes</li><li>Templates, trackers and support resources</li><li>Clear priorities for managers and teams</li></ul></article><article class="detail-box"><h3>Support implementation</h3><p>Work alongside managers and teams to keep change clear, purposeful and manageable.</p><ul><li>Manager and team coaching</li><li>Review meetings and progress checks</li><li>Support with embedding change</li></ul></article></div></div></section>
+    <section class="light" id="training" style="padding-top:0"><div class="container service-detail"><div></div><div class="detail-stack"><div class="eyebrow">Training & Coaching Delivery</div><h2>Learning that feels useful from the first session.</h2><article class="detail-box"><h3>Interactive delivery</h3><p>Sessions are designed around discussion, reflection, questioning and workplace application.</p><ul><li>Facilitated workshops</li><li>Reflective coaching activities</li><li>Practical workplace tasks</li></ul></article><article class="detail-box"><h3>Tailored programmes</h3><p>Training is shaped around the audience, context, goals and expected outcomes.</p><ul><li>Leadership and management development</li><li>Communication and confidence building</li><li>Training designed around business goals</li></ul></article><article class="detail-box"><h3>Lasting confidence</h3><p>Participants leave with practical next steps, tools and language they can continue using.</p><ul><li>Clear action planning</li><li>Post-session reflection prompts</li><li>Optional follow-up coaching or review</li></ul></article></div></div></section>
+    <section class="light" id="apprenticeships" style="padding-top:0"><div class="container service-detail"><div></div><div class="detail-stack"><div class="eyebrow">Apprenticeship Support</div><h2>Clearer evidence. Stronger progress. Better confidence.</h2><article class="detail-box"><h3>Portfolio planning</h3><p>Help learners connect real workplace activity to meaningful evidence and assessment criteria.</p><ul><li>Evidence mapping</li><li>Portfolio structure and planning</li><li>Progress actions and review preparation</li></ul></article><article class="detail-box"><h3>Employer guidance</h3><p>Support employers to understand their role in reviews, witness evidence and skills development.</p><ul><li>Witness testimony support</li><li>Workplace evidence opportunities</li><li>Manager feedback and review guidance</li></ul></article><article class="detail-box"><h3>Assessment preparation</h3><p>Build confidence for gateway, professional discussion, presentation and wider assessment expectations.</p><ul><li>Gateway readiness checks</li><li>Professional discussion preparation</li><li>Presentation and questioning practice</li></ul></article></div></div></section>
+    <section class="light" id="life" style="padding-top:0"><div class="container service-detail"><div></div><div class="detail-stack"><div class="eyebrow">Life Coaching</div><h2>Space to think, reset and move forward.</h2><article class="detail-box"><h3>Clarify direction</h3><p>Explore what matters, what needs attention and what progress could realistically look like.</p><ul><li>Personal and professional goal setting</li><li>Career or confidence conversations</li><li>Reflection on barriers and choices</li></ul></article><article class="detail-box"><h3>Build self-awareness</h3><p>Use reflective coaching to understand strengths, patterns, barriers and opportunities.</p><ul><li>Strengths and values exploration</li><li>Confidence and mindset support</li><li>Reflective questioning and challenge</li></ul></article><article class="detail-box"><h3>Create action</h3><p>Turn reflection into focused next steps, with accountability and encouragement built in.</p><ul><li>Realistic action planning</li><li>Accountability check-ins</li><li>Progress review and next steps</li></ul></article></div></div></section>
+
+    <section class="dark-section" id="method"><div class="container"><div class="method-hero"><div class="method-hero-content"><div><div class="eyebrow">Method</div><h2>Insight before intervention.</h2><p>Our method is designed to help clients make informed decisions before committing to a programme. We begin by understanding the individual, team or business need, then shape the right support around the evidence.</p></div><div class="method-badges"><div class="method-badge"><strong>Free</strong><span>Initial consultation</span></div><div class="method-badge"><strong>360°</strong><span>Training review</span></div><div class="method-badge"><strong>Skills</strong><span>Audit and gap analysis</span></div><div class="method-badge"><strong>Diagnostic</strong><span>Assessment-led planning</span></div></div></div></div><div class="method-grid"><article class="method-card"><div><div class="method-no">01</div><h3>Free consultation</h3><p>A focused conversation to understand your goals, challenges, timescales and priorities before recommending any support.</p></div><a href="#contact">Book consultation →</a></article><article class="method-card"><div><div class="method-no">02</div><h3>Training review</h3><p>We review existing training, learning activity and development plans to identify what is working and where impact can improve.</p></div><a href="#contact">Request review →</a></article><article class="method-card"><div><div class="method-no">03</div><h3>Skills audit</h3><p>We identify current strengths, role requirements, capability gaps and opportunities for targeted development.</p></div><a href="#contact">Start audit →</a></article><article class="method-card"><div><div class="method-no">04</div><h3>Diagnostic assessments</h3><p>We use structured diagnostic activity to understand needs before designing coaching, consultancy or training.</p></div><a href="#contact">Explore diagnostics →</a></article></div><div class="method-flow"><div class="flow-item"><small>Stage one</small><strong>Listen and understand</strong></div><div class="flow-item"><small>Stage two</small><strong>Review and diagnose</strong></div><div class="flow-item"><small>Stage three</small><strong>Design targeted support</strong></div><div class="flow-item"><small>Stage four</small><strong>Deliver, measure and refine</strong></div></div><div class="method-note"><p>This approach works for individuals seeking direction, managers developing confidence, apprentices needing structure and businesses wanting a clearer picture of training needs before investing in development.</p><a class="btn" href="#contact">Start with a free consultation →</a></div></div></section>
+    <section class="quote-band"><div class="container"><blockquote>Learning, when designed well, changes what people believe they are capable of.</blockquote><p>Archetype Coaching Group supports that change through professional challenge, reflective conversation and practical development.</p></div></section>
+    <section class="dark-section" id="team"><div class="container split"><div class="copy"><div class="eyebrow">The Team</div><h2>Experienced support with a human approach.</h2><p>Clients need support that feels credible and human. Archetype Coaching Group brings together coaching, education, training and workplace development experience to create support that is warm, focused and useful.</p><div class="statement">A mentor sees more talent and ability within you than you see in yourself and helps bring it out of you.</div></div><div class="image-frame team"></div></div></section>
+    <section class="light" id="faq"><div class="container"><div class="section-head"><div><div class="eyebrow">Questions</div><h2>Before you get in touch.</h2></div><p>A few quick answers to help you decide whether Archetype Coaching Group is the right fit.</p></div><div class="faq"><details><summary>Is the initial consultation free?</summary><p>Yes. The first consultation is free and is used to understand your goals, challenges and whether our support is the right fit.</p></details><details><summary>Can you review our existing training?</summary><p>Yes. We can complete a training review to explore current provision, identify gaps and recommend practical improvements.</p></details><details><summary>Do you offer skills audits and diagnostic assessments?</summary><p>Yes. We use skills audits and diagnostic assessments to understand strengths, development needs and the most appropriate support route.</p></details><details><summary>Can support be tailored to our organisation?</summary><p>Yes. Support can be shaped around your aims, staff, learners, timescales and current challenges.</p></details></div></div></section>
+
+    <section class="contact-page" id="contact">
+      <div class="container contact-wrap">
+        <aside class="contact-card">
+          <div>
+            <div class="eyebrow">Contact</div>
+            <h2>Start with one clear conversation.</h2>
+            <p>Use the contact form to request a free consultation, training review, skills audit, diagnostic assessment or general enquiry. Every enquiry is sent to <strong>enquiry@archetypecoachinggroup.com</strong>.</p>
+            <div class="contact-promise">
+              <div><span>01</span><div><strong>Free consultation</strong><small>A no-pressure first conversation to understand your goals and recommend the most useful next step.</small></div></div>
+              <div><span>02</span><div><strong>Needs-led support</strong><small>We review the context first, then suggest coaching, consultancy, training or assessment-led support.</small></div></div>
+              <div><span>03</span><div><strong>Clear follow-up</strong><small>You receive a clear response so you know what support would be suitable and why.</small></div></div>
+            </div>
+          </div>
+          <div class="contact-list">
+            <a href="mailto:enquiry@archetypecoachinggroup.com?subject=Website%20Enquiry"><span>Email directly</span><span>→</span></a>
+            <a href="#home"><span>Back to top</span><span>↑</span></a>
+          </div>
+        </aside>
+
+        <div class="contact-form-panel">
+          <div>
+            <h3>Send an enquiry</h3>
+            <p>Complete the form below and press send. The enquiry will be submitted directly to Archetype Coaching Group.</p>
+          </div>
+
+          <form class="contact-form" id="enquiryForm" action="https://formsubmit.co/enquiry@archetypecoachinggroup.com" method="POST">
+            <input type="hidden" name="_subject" value="New Website Enquiry - Archetype Coaching Group">
+            <input type="hidden" name="_template" value="table">
+            <input type="hidden" name="_captcha" value="false">
+            <input type="hidden" name="_autoresponse" value="Thank you for contacting Archetype Coaching Group. We have received your enquiry and will respond as soon as possible.">
+
+            <div class="form-row">
+              <div class="field">
+                <label for="firstName">First name</label>
+                <input id="firstName" name="First name" type="text" required placeholder="Your first name">
+              </div>
+              <div class="field">
+                <label for="lastName">Last name</label>
+                <input id="lastName" name="Last name" type="text" placeholder="Your last name">
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="emailAddress">Email address</label>
+              <input id="emailAddress" name="email" type="email" required placeholder="you@example.com">
+            </div>
+
+            <div class="field">
+              <label for="organisation">Organisation / workplace</label>
+              <input id="organisation" name="Organisation / workplace" type="text" placeholder="Organisation or workplace">
+            </div>
+
+            <div class="field">
+              <label for="serviceArea">What are you interested in?</label>
+              <select id="serviceArea" name="Service area" required>
+                <option value="Free consultation">Free consultation</option>
+                <option value="Training review">Training review</option>
+                <option value="Skills audit">Skills audit</option>
+                <option value="Diagnostic assessments">Diagnostic assessments</option>
+                <option value="Development Consultancy">Development Consultancy</option>
+                <option value="Training and Coaching Delivery">Training and Coaching Delivery</option>
+                <option value="Apprenticeship Support">Apprenticeship Support</option>
+                <option value="Life Coaching">Life Coaching</option>
+                <option value="Not sure yet">Not sure yet</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="message">Message</label>
+              <textarea id="message" name="Message" required placeholder="Tell us what you would like support with"></textarea>
+            </div>
+
+            <button class="btn dark" type="submit">Send enquiry →</button>
+            <p class="form-help">This form sends enquiries to enquiry@archetypecoachinggroup.com using FormSubmit. The first test submission may ask the mailbox owner to verify the address; after that, future enquiries should send normally.</p>
+          </form>
+
+          <div class="direct-email">
+            <span>Prefer to email directly?</span>
+            <a href="mailto:enquiry@archetypecoachinggroup.com?subject=Website%20Enquiry">enquiry@archetypecoachinggroup.com</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <a class="logo-original" href="#home"><span class="logo-word">Archetype Coaching Group</span></a>
+          <p>Coaching delivery and development consultancy for people and organisations ready to move forward with clarity.</p>
+        </div>
+        <div>
+          <h4>Navigate</h4>
+          <a href="#home">Home</a>
+          <a href="#about">About</a>
+          <a href="#services">Services</a>
+          <a href="#method">Method</a>
+          <a href="#faq">FAQs</a>
+          <a href="#contact">Contact</a>
+        </div>
+        <div>
+          <h4>Services</h4>
+          <a href="#consultancy">Development Consultancy</a>
+          <a href="#training">Training & Coaching</a>
+          <a href="#apprenticeships">Apprenticeship Support</a>
+          <a href="#life">Life Coaching</a>
+        </div>
+        <div>
+          <h4>Begin</h4>
+          <a href="#contact">Free consultation</a>
+          <a href="#method">Training review</a>
+          <a href="#method">Skills audit</a>
+          <a href="mailto:enquiry@archetypecoachinggroup.com?subject=Website%20Enquiry">Email</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© Archetype Coaching Group. All rights reserved.</p>
+        <p>Be future-proof and future-ready.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener('keydown', function(e){
+      if(e.key === 'Escape') document.body.classList.remove('menu-open');
+    });
+
+    document.querySelectorAll('a[href^="#"]').forEach(function(link){
+      link.addEventListener('click', function(event){
+        var targetId = this.getAttribute('href');
+        var target = document.querySelector(targetId);
+        if(target){
+          event.preventDefault();
+          document.body.classList.remove('menu-open');
+          target.scrollIntoView({ behavior:'smooth', block:'start' });
+        }
+      });
+    });
+  </script>
+</body>
+</html>
