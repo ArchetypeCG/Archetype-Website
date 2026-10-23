@@ -564,3 +564,6 @@ h1 .serif-word{color:#a2cfff}
 .email-alternative>a{font-size:12px;color:#086ad3;display:inline-flex;gap:15px;align-items:center;text-decoration:underline;text-underline-offset:4px}
 .email-alternative>a>span{font-size:17px}
 .email-alternative>p{font-size:10px;line-height:1.8;color:#6a82a1;margin-top:9px}
+.portfolio-use-cases{display:flex;flex-wrap:wrap;gap:12px;margin-top:-8px}
+.portfolio-use-cases>span{background:#eaf2ff;border:1px solid #d5e5fc;border-radius:30px;padding:10px 16px;color:#31679e;font-size:11px;line-height:1.5}
+@media(max-width:700px){.portfolio-use-cases{gap:9px;margin-top:-5px}.portfolio-use-cases>span{font-size:10px;padding:9px 13px}}

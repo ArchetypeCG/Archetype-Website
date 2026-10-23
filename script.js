@@ -135,6 +135,7 @@ enquiryForm.addEventListener('submit', async event => {
   enquiryForm.setAttribute('aria-busy', 'true');
   enquirySubmit.textContent = 'Submitting your enquiry…';
   enquiryStatus.dataset.state = 'pending';
+  delete enquiryStatus.dataset.errorCode;
   enquiryStatus.textContent = 'Submitting securely. Please keep this page open.';
   refreshEmailAlternative();
   const controller = new AbortController();
@@ -142,25 +143,40 @@ enquiryForm.addEventListener('submit', async event => {
   try {
     const response = await fetch('https://formsubmit.co/ajax/enquiry@archetypecoachinggroup.com', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-      body: JSON.stringify(Object.fromEntries(fields)),
+      // Let the browser set multipart/form-data, avoiding a JSON CORS preflight.
+      headers: { Accept: 'application/json' },
+      body: fields,
       signal: controller.signal,
       redirect: 'error',
       credentials: 'omit',
       referrerPolicy: 'strict-origin-when-cross-origin'
     });
-    if (!response.ok) throw new Error('Submission service unavailable');
+    if (!response.ok) {
+      const failure = new Error('Submission service unavailable');
+      failure.code = response.status === 429 ? 'rate-limit' : 'service';
+      throw failure;
+    }
     const result = await response.json();
     const accepted = result.success === true || result.success === 'true';
     const needsActivation = /activat|confirm.*email|verify.*email/i.test(String(result.message || ''));
-    if (!accepted || needsActivation) throw new Error('Submission not confirmed');
+    if (!accepted || needsActivation) {
+      const failure = new Error('Submission not confirmed');
+      failure.code = needsActivation ? 'activation' : 'rejected';
+      throw failure;
+    }
     enquiryStatus.dataset.state = 'success';
     enquiryStatus.textContent = 'Your enquiry has been submitted. Thank you — we look forward to speaking with you.';
     enquiryForm.reset();
     refreshEmailAlternative();
   } catch (error) {
     enquiryStatus.dataset.state = 'error';
-    enquiryStatus.textContent = 'We couldn’t confirm your submission. Your details are still here. Use “Email this enquiry instead” below to send them through your email app.';
+    const reason = error.name === 'AbortError' ? 'timeout' : (error.code || 'connection');
+    enquiryStatus.dataset.errorCode = reason;
+    enquiryStatus.textContent = reason === 'rate-limit'
+      ? 'Our form service is receiving too many requests. Please wait a little before trying again, or use “Email this enquiry instead”. Your details are still here.'
+      : reason === 'timeout'
+        ? 'The secure submission took too long to confirm. Your details are still here. Please use “Email this enquiry instead” if you need to contact us now.'
+        : 'We couldn’t confirm your enquiry with our secure form service. Your details are still here. You can use “Email this enquiry instead” below.';
     refreshEmailAlternative();
   } finally {
     window.clearTimeout(timeout);
