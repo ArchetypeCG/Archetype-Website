@@ -108,11 +108,12 @@ productLightbox.addEventListener('close', () => {
   imageTrigger?.focus();
 });
 
-// Submit over HTTPS without navigating to a third-party page or following redirects.
+// Use the browser's secure form POST, avoiding cross-origin background requests.
 const enquiryForm = document.querySelector('#enquiryForm');
 const enquiryStatus = document.querySelector('#form-status');
 const enquirySubmit = enquiryForm.querySelector('[type="submit"]');
 const emailAlternative = document.querySelector('#email-enquiry');
+const enquiryButtonContent = enquirySubmit.innerHTML;
 let enquiryPending = false;
 function enquiryEmailBody() {
   const data = new FormData(enquiryForm);
@@ -124,66 +125,27 @@ function refreshEmailAlternative() {
 enquiryForm.addEventListener('input', refreshEmailAlternative);
 enquiryForm.addEventListener('change', refreshEmailAlternative);
 emailAlternative.addEventListener('click', refreshEmailAlternative);
-enquiryForm.addEventListener('submit', async event => {
-  event.preventDefault();
-  if (enquiryPending || !enquiryForm.reportValidity()) return;
-  const fields = new FormData(enquiryForm);
-  if (String(fields.get('_honey') || '').trim()) return;
-  enquiryPending = true;
-  const buttonContent = enquirySubmit.innerHTML;
-  enquirySubmit.disabled = true;
-  enquiryForm.setAttribute('aria-busy', 'true');
-  enquirySubmit.textContent = 'Submitting your enquiry…';
-  enquiryStatus.dataset.state = 'pending';
-  delete enquiryStatus.dataset.errorCode;
-  enquiryStatus.textContent = 'Submitting securely. Please keep this page open.';
-  refreshEmailAlternative();
-  const controller = new AbortController();
-  const timeout = window.setTimeout(() => controller.abort(), 20000);
-  try {
-    const response = await fetch('https://formsubmit.co/ajax/enquiry@archetypecoachinggroup.com', {
-      method: 'POST',
-      // Let the browser set multipart/form-data, avoiding a JSON CORS preflight.
-      headers: { Accept: 'application/json' },
-      body: fields,
-      signal: controller.signal,
-      redirect: 'error',
-      credentials: 'omit',
-      referrerPolicy: 'strict-origin-when-cross-origin'
-    });
-    if (!response.ok) {
-      const failure = new Error('Submission service unavailable');
-      failure.code = response.status === 429 ? 'rate-limit' : 'service';
-      throw failure;
-    }
-    const result = await response.json();
-    const accepted = result.success === true || result.success === 'true';
-    const needsActivation = /activat|confirm.*email|verify.*email/i.test(String(result.message || ''));
-    if (!accepted || needsActivation) {
-      const failure = new Error('Submission not confirmed');
-      failure.code = needsActivation ? 'activation' : 'rejected';
-      throw failure;
-    }
-    enquiryStatus.dataset.state = 'success';
-    enquiryStatus.textContent = 'Your enquiry has been submitted. Thank you — we look forward to speaking with you.';
-    enquiryForm.reset();
-    refreshEmailAlternative();
-  } catch (error) {
-    enquiryStatus.dataset.state = 'error';
-    const reason = error.name === 'AbortError' ? 'timeout' : (error.code || 'connection');
-    enquiryStatus.dataset.errorCode = reason;
-    enquiryStatus.textContent = reason === 'rate-limit'
-      ? 'Our form service is receiving too many requests. Please wait a little before trying again, or use “Email this enquiry instead”. Your details are still here.'
-      : reason === 'timeout'
-        ? 'The secure submission took too long to confirm. Your details are still here. Please use “Email this enquiry instead” if you need to contact us now.'
-        : 'We couldn’t confirm your enquiry with our secure form service. Your details are still here. You can use “Email this enquiry instead” below.';
-    refreshEmailAlternative();
-  } finally {
-    window.clearTimeout(timeout);
-    enquiryPending = false;
-    enquirySubmit.disabled = false;
-    enquirySubmit.innerHTML = buttonContent;
-    enquiryForm.removeAttribute('aria-busy');
+enquiryForm.addEventListener('submit', event => {
+  if (enquiryPending || !enquiryForm.reportValidity() || enquiryForm.elements._honey.value.trim()) {
+    event.preventDefault();
+    return;
   }
+  // Pin both destinations to HTTPS, including when returning from an older cached page.
+  enquiryForm.action = 'https://formsubmit.co/enquiry@archetypecoachinggroup.com';
+  enquiryForm.querySelector('[name="_next"]').value = 'https://archetypecoachinggroup.com/thank-you.html';
+  enquiryPending = true;
+  enquirySubmit.disabled = true;
+  enquirySubmit.textContent = 'Opening secure submission…';
+  enquiryStatus.textContent = 'Your enquiry is being submitted. Please wait for the confirmation page.';
+  enquiryForm.setAttribute('aria-busy', 'true');
+  // Allow the native HTTPS POST. No fetch, CORS preflight or automatic retry.
+});
+window.addEventListener('pageshow', () => {
+  enquiryPending = false;
+  enquirySubmit.disabled = false;
+  enquirySubmit.innerHTML = enquiryButtonContent;
+  enquiryForm.removeAttribute('aria-busy');
+  enquiryStatus.textContent = '';
+  refreshEmailAlternative();
 });
 refreshEmailAlternative();
