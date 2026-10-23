@@ -107,3 +107,67 @@ productLightbox.addEventListener('close', () => {
   document.body.classList.remove('image-expanded');
   imageTrigger?.focus();
 });
+
+// Submit over HTTPS without navigating to a third-party page or following redirects.
+const enquiryForm = document.querySelector('#enquiryForm');
+const enquiryStatus = document.querySelector('#form-status');
+const enquirySubmit = enquiryForm.querySelector('[type="submit"]');
+const emailAlternative = document.querySelector('#email-enquiry');
+let enquiryPending = false;
+function enquiryEmailBody() {
+  const data = new FormData(enquiryForm);
+  return `Website enquiry\n\nName: ${data.get('name') || ''}\nOrganisation: ${data.get('Organisation') || ''}\nEmail: ${data.get('email') || ''}\nInterest: ${data.get('Interest') || ''}\n\n${data.get('message') || ''}`;
+}
+function refreshEmailAlternative() {
+  emailAlternative.href = `mailto:enquiry@archetypecoachinggroup.com?subject=${encodeURIComponent('Website enquiry — Archetype')}&body=${encodeURIComponent(enquiryEmailBody())}`;
+}
+enquiryForm.addEventListener('input', refreshEmailAlternative);
+enquiryForm.addEventListener('change', refreshEmailAlternative);
+emailAlternative.addEventListener('click', refreshEmailAlternative);
+enquiryForm.addEventListener('submit', async event => {
+  event.preventDefault();
+  if (enquiryPending || !enquiryForm.reportValidity()) return;
+  const fields = new FormData(enquiryForm);
+  if (String(fields.get('_honey') || '').trim()) return;
+  enquiryPending = true;
+  const buttonContent = enquirySubmit.innerHTML;
+  enquirySubmit.disabled = true;
+  enquiryForm.setAttribute('aria-busy', 'true');
+  enquirySubmit.textContent = 'Submitting your enquiry…';
+  enquiryStatus.dataset.state = 'pending';
+  enquiryStatus.textContent = 'Submitting securely. Please keep this page open.';
+  refreshEmailAlternative();
+  const controller = new AbortController();
+  const timeout = window.setTimeout(() => controller.abort(), 20000);
+  try {
+    const response = await fetch('https://formsubmit.co/ajax/enquiry@archetypecoachinggroup.com', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+      body: JSON.stringify(Object.fromEntries(fields)),
+      signal: controller.signal,
+      redirect: 'error',
+      credentials: 'omit',
+      referrerPolicy: 'strict-origin-when-cross-origin'
+    });
+    if (!response.ok) throw new Error('Submission service unavailable');
+    const result = await response.json();
+    const accepted = result.success === true || result.success === 'true';
+    const needsActivation = /activat|confirm.*email|verify.*email/i.test(String(result.message || ''));
+    if (!accepted || needsActivation) throw new Error('Submission not confirmed');
+    enquiryStatus.dataset.state = 'success';
+    enquiryStatus.textContent = 'Your enquiry has been submitted. Thank you — we look forward to speaking with you.';
+    enquiryForm.reset();
+    refreshEmailAlternative();
+  } catch (error) {
+    enquiryStatus.dataset.state = 'error';
+    enquiryStatus.textContent = 'We couldn’t confirm your submission. Your details are still here. Use “Email this enquiry instead” below to send them through your email app.';
+    refreshEmailAlternative();
+  } finally {
+    window.clearTimeout(timeout);
+    enquiryPending = false;
+    enquirySubmit.disabled = false;
+    enquirySubmit.innerHTML = buttonContent;
+    enquiryForm.removeAttribute('aria-busy');
+  }
+});
+refreshEmailAlternative();
