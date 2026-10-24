@@ -108,11 +108,12 @@ productLightbox.addEventListener('close', () => {
   imageTrigger?.focus();
 });
 
-// Use the browser's secure form POST, avoiding cross-origin background requests.
+// Progressive enhancement: show a branded page only after Formspree confirms success.
 const enquiryForm = document.querySelector('#enquiryForm');
 const enquiryStatus = document.querySelector('#form-status');
 const enquirySubmit = enquiryForm.querySelector('[type="submit"]');
 const emailAlternative = document.querySelector('#email-enquiry');
+const secureFormFallback = document.querySelector('#secure-form-fallback');
 const enquiryButtonContent = enquirySubmit.innerHTML;
 let enquiryPending = false;
 function enquiryEmailBody() {
@@ -122,29 +123,71 @@ function enquiryEmailBody() {
 function refreshEmailAlternative() {
   emailAlternative.href = `mailto:enquiry@archetypecoachinggroup.com?subject=${encodeURIComponent('Website enquiry — Archetype')}&body=${encodeURIComponent(enquiryEmailBody())}`;
 }
-enquiryForm.addEventListener('input', refreshEmailAlternative);
-enquiryForm.addEventListener('change', refreshEmailAlternative);
-emailAlternative.addEventListener('click', refreshEmailAlternative);
-enquiryForm.addEventListener('submit', event => {
-  if (enquiryPending || !enquiryForm.reportValidity() || String(enquiryForm.elements._gotcha?.value || '').trim()) {
-    event.preventDefault();
-    return;
-  }
-  // Pin the form destination to the configured HTTPS Formspree endpoint.
-  enquiryForm.action = 'https://formspree.io/f/mbgglrpw';
-  enquiryPending = true;
-  enquirySubmit.disabled = true;
-  enquirySubmit.textContent = 'Opening secure submission…';
-  enquiryStatus.textContent = 'Your enquiry is being submitted. Please wait for the confirmation page.';
-  enquiryForm.setAttribute('aria-busy', 'true');
-  // Allow the native HTTPS POST. No fetch, CORS preflight or automatic retry.
-});
-window.addEventListener('pageshow', () => {
+function resetEnquiryButton() {
   enquiryPending = false;
   enquirySubmit.disabled = false;
   enquirySubmit.innerHTML = enquiryButtonContent;
   enquiryForm.removeAttribute('aria-busy');
+}
+enquiryForm.addEventListener('input', refreshEmailAlternative);
+enquiryForm.addEventListener('change', refreshEmailAlternative);
+emailAlternative.addEventListener('click', refreshEmailAlternative);
+enquiryForm.addEventListener('submit', async event => {
+  if (enquiryPending || !enquiryForm.reportValidity() || String(enquiryForm.elements._gotcha?.value || '').trim()) {
+    event.preventDefault();
+    return;
+  }
+  enquiryForm.action = 'https://formspree.io/f/mbgglrpw';
+  const nativeSubmission = event.submitter?.id === 'submit-direct' || !window.fetch || !window.AbortController;
+  if (!nativeSubmission) event.preventDefault();
+  enquiryPending = true;
+  enquirySubmit.disabled = true;
+  enquirySubmit.textContent = nativeSubmission ? 'Opening secure submission…' : 'Sending your enquiry…';
+  enquiryStatus.textContent = nativeSubmission ? 'Please wait for the secure confirmation page.' : 'Sending securely. Please keep this page open.';
+  enquiryStatus.dataset.state = 'pending';
+  enquiryForm.setAttribute('aria-busy', 'true');
+  if (nativeSubmission) return;
+  secureFormFallback.hidden = true;
+  refreshEmailAlternative();
+  const controller = new AbortController();
+  const timeout = window.setTimeout(() => controller.abort(), 20000);
+  try {
+    const response = await fetch(enquiryForm.action, {
+      method: 'POST', body: new FormData(enquiryForm),
+      headers: { Accept: 'application/json' },
+      credentials: 'omit', redirect: 'error', signal: controller.signal
+    });
+    const result = await response.json();
+    const accepted = response.ok && result && result.ok !== false && !result.error &&
+      (!result.errors || (Array.isArray(result.errors) && result.errors.length === 0)) &&
+      (typeof result.next === 'string' || result.ok === true);
+    if (!accepted) {
+      const failure = new Error('Enquiry not accepted');
+      failure.fieldErrors = Array.isArray(result?.errors) ? result.errors : [];
+      throw failure;
+    }
+    enquiryStatus.dataset.state = 'success';
+    enquiryStatus.textContent = 'Your enquiry has been accepted. Opening your confirmation…';
+    // Keep personal information out of the address and the confirmation page.
+    window.location.assign('thank-you.html');
+  } catch (error) {
+    const invalidEmail = error.fieldErrors?.some(item => item.field === 'email');
+    enquiryStatus.dataset.state = 'error';
+    enquiryStatus.textContent = invalidEmail
+      ? 'Please check your email address and try again. Your enquiry details are still here.'
+      : 'We couldn’t confirm the background submission. Your details are still here. You can continue via the secure form below, or email your enquiry instead.';
+    secureFormFallback.hidden = Boolean(invalidEmail);
+    resetEnquiryButton();
+    refreshEmailAlternative();
+  } finally {
+    window.clearTimeout(timeout);
+  }
+});
+window.addEventListener('pageshow', () => {
+  resetEnquiryButton();
   enquiryStatus.textContent = '';
+  delete enquiryStatus.dataset.state;
+  secureFormFallback.hidden = true;
   refreshEmailAlternative();
 });
 refreshEmailAlternative();
