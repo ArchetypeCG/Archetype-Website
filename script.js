@@ -126,13 +126,12 @@ enquiryForm.addEventListener('input', refreshEmailAlternative);
 enquiryForm.addEventListener('change', refreshEmailAlternative);
 emailAlternative.addEventListener('click', refreshEmailAlternative);
 enquiryForm.addEventListener('submit', event => {
-  if (enquiryPending || !enquiryForm.reportValidity() || enquiryForm.elements._honey.value.trim()) {
+  if (enquiryPending || !enquiryForm.reportValidity() || String(enquiryForm.elements._gotcha?.value || '').trim()) {
     event.preventDefault();
     return;
   }
-  // Pin both destinations to HTTPS, including when returning from an older cached page.
-  enquiryForm.action = 'https://formsubmit.co/enquiry@archetypecoachinggroup.com';
-  enquiryForm.querySelector('[name="_next"]').value = 'https://archetypecoachinggroup.com/thank-you.html';
+  // Pin the form destination to the configured HTTPS Formspree endpoint.
+  enquiryForm.action = 'https://formspree.io/f/mbgglrpw';
   enquiryPending = true;
   enquirySubmit.disabled = true;
   enquirySubmit.textContent = 'Opening secure submission…';
