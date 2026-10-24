@@ -770,3 +770,11 @@ h1 .serif-word{color:#a2cfff}
 @media(max-width:900px){.homepage-editorial-frame{height:470px;border-radius:6px}.homepage-editorial>figcaption{align-items:start;gap:10px}.homepage-editorial>figcaption>span{font-size:5px;letter-spacing:.8px;max-width:110px;padding-top:5px}.homepage-editorial>figcaption>a{font-size:9px;gap:9px}.homepage-editorial>figcaption>a>span{font-size:16px}}
 @media(max-width:700px){.homepage-editorial-frame{height:410px;border-radius:6px}.homepage-editorial-frame>img{object-position:80% center}.homepage-editorial>figcaption{gap:14px;margin-top:17px;padding-top:15px;align-items:center}.homepage-editorial>figcaption>span{font-size:6px;letter-spacing:.8px;max-width:130px;padding-top:0}.homepage-editorial>figcaption>a{font-size:10px;gap:10px}.homepage-editorial>figcaption>a>span{font-size:18px}}
 @media(max-width:370px){.homepage-editorial-frame{height:360px}.homepage-editorial>figcaption{gap:12px}.homepage-editorial>figcaption>span{font-size:5px;letter-spacing:.7px;max-width:100px}.homepage-editorial>figcaption>a{font-size:8px;gap:8px}}
+
+/* Blue-toned photography blended into the hero rather than framed as a card. */
+.homepage-editorial-frame{position:relative;isolation:isolate;background:transparent;border:0;border-radius:0;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent 0%,#000 12%,#000 89%,transparent 100%),linear-gradient(180deg,transparent 0%,#000 9%,#000 82%,transparent 100%);mask-image:linear-gradient(90deg,transparent 0%,#000 12%,#000 89%,transparent 100%),linear-gradient(180deg,transparent 0%,#000 9%,#000 82%,transparent 100%);-webkit-mask-composite:source-in;mask-composite:intersect}
+.homepage-editorial-frame>img{opacity:.82;object-position:52% center;filter:saturate(.78);mix-blend-mode:normal}
+.homepage-editorial-frame:after{content:'';position:absolute;inset:0;background:linear-gradient(110deg,#13357963,#2150a91a 50%,#214ba642);pointer-events:none}
+.homepage-editorial>figcaption{border-top:0;margin-top:7px;padding:0 12px;opacity:.85}
+@media(max-width:700px){.homepage-editorial-frame{height:350px}.homepage-editorial-frame>img{object-position:52% center;opacity:.86}.homepage-editorial>figcaption{margin-top:11px;padding-inline:7px}}
+@media(max-width:370px){.homepage-editorial-frame{height:310px}.homepage-editorial>figcaption{padding-inline:4px}}
