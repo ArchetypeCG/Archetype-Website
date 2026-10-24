@@ -778,3 +778,19 @@ h1 .serif-word{color:#a2cfff}
 .homepage-editorial>figcaption{border-top:0;margin-top:7px;padding:0 12px;opacity:.85}
 @media(max-width:700px){.homepage-editorial-frame{height:350px}.homepage-editorial-frame>img{object-position:52% center;opacity:.86}.homepage-editorial>figcaption{margin-top:11px;padding-inline:7px}}
 @media(max-width:370px){.homepage-editorial-frame{height:310px}.homepage-editorial>figcaption{padding-inline:4px}}
+
+/* Original vector artwork derived from Archetype's own layered brand symbol. */
+.archetype-brand-art{margin:0;position:relative;min-width:0;align-self:center}
+.archetype-brand-svg{display:block;width:100%;height:auto;overflow:visible;aspect-ratio:600/550}
+.brand-art-wordmark{font-family:var(--display);font-size:33px;font-weight:700;letter-spacing:-1.6px;fill:#ecf5ff}
+.brand-art-subtitle{font-family:var(--sans);font-size:5px;font-weight:500;letter-spacing:1.45px;fill:#a9cfff}
+.brand-art-annotations text{font-family:var(--sans);font-size:10px;font-weight:400;letter-spacing:.1px;fill:#bfd8f8}
+.archetype-brand-art>figcaption{display:flex;justify-content:space-between;align-items:center;gap:18px;border-top:1px solid #adceff20;padding-top:18px;margin-top:0;color:#a9c9ef}
+.archetype-brand-art>figcaption>span{font-size:6px;font-weight:500;letter-spacing:1.2px;line-height:1.8}
+.archetype-brand-art>figcaption>a{display:flex;align-items:center;gap:15px;font-size:10px;color:#d5e6ff;line-height:1.8}
+.archetype-brand-art>figcaption>a>span{font-size:18px;color:#87bfff}
+.archetype-brand-art>figcaption>a:hover{color:#92caff}
+@media(max-width:1150px){.brand-art-annotations text{font-size:11px}.archetype-brand-art>figcaption{gap:14px;padding-top:16px}.archetype-brand-art>figcaption>span{font-size:5px;letter-spacing:.9px}.archetype-brand-art>figcaption>a{font-size:9px;gap:10px}}
+@media(max-width:900px){.archetype-brand-art>figcaption{display:block;padding-top:14px}.archetype-brand-art>figcaption>span{display:block;margin-bottom:9px;font-size:6px;letter-spacing:1px}.archetype-brand-art>figcaption>a{font-size:10px;gap:17px}.brand-art-annotations text{font-size:12px}}
+@media(max-width:700px){.archetype-brand-art{margin-top:-5px}.brand-art-wordmark{font-size:35px}.brand-art-subtitle{font-size:6px;letter-spacing:1.25px}.brand-art-annotations text{font-size:13px;letter-spacing:0}.archetype-brand-art>figcaption{display:block;padding-top:18px;margin-top:8px}.archetype-brand-art>figcaption>span{font-size:6px;letter-spacing:1.2px;margin-bottom:10px}.archetype-brand-art>figcaption>a{font-size:11px;gap:17px}}
+@media(max-width:370px){.brand-art-annotations text{font-size:14px}.archetype-brand-art>figcaption>a{font-size:10px}}
