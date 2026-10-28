@@ -795,19 +795,16 @@ h1 .serif-word{color:#a2cfff}
 @media(max-width:700px){.archetype-brand-art{margin-top:-5px}.brand-art-wordmark{font-size:35px}.brand-art-subtitle{font-size:6px;letter-spacing:1.25px}.brand-art-annotations text{font-size:13px;letter-spacing:0}.archetype-brand-art>figcaption{display:block;padding-top:18px;margin-top:8px}.archetype-brand-art>figcaption>span{font-size:6px;letter-spacing:1.2px;margin-bottom:10px}.archetype-brand-art>figcaption>a{font-size:11px;gap:17px}}
 @media(max-width:370px){.brand-art-annotations text{font-size:14px}.archetype-brand-art>figcaption>a{font-size:10px}}
 
-/* Award recognition sits with the people and expertise behind the training. */
-.mentor-recognition{position:relative;isolation:isolate;overflow:hidden;display:grid;grid-template-columns:170px minmax(0,1fr) auto;align-items:center;gap:36px;margin-top:24px;padding:34px 38px;background:#091b46;border:1px solid #1d3962;border-radius:18px;color:#f6f8fc}
-.mentor-recognition:before{content:'';position:absolute;z-index:-1;width:350px;height:350px;left:-160px;top:-170px;border-radius:50%;background:radial-gradient(circle,#cf387947,transparent 70%);pointer-events:none}
-.mentor-recognition:after{content:'';position:absolute;inset:0 auto 0 0;width:4px;background:linear-gradient(#ed8a55,#cf367f,#4db5d3)}
-.mentor-award-mark{display:grid;grid-template-columns:40px 1fr;align-items:center;column-gap:14px;row-gap:8px;padding-right:26px;border-right:1px solid #ffffff24}
-.mentor-award-star{grid-row:1/3;font-size:49px;line-height:1;color:#96ceff}
-.mentor-award-mark>span:nth-child(2){font-size:8px;line-height:1.8;font-weight:600;letter-spacing:1.1px;color:#bfd3ee}
-.mentor-award-mark>strong{font-family:var(--display);font-size:28px;line-height:1;letter-spacing:-1px;font-weight:500}
-.mentor-award-copy>.eyebrow{color:#9fcaff;font-size:8px;letter-spacing:1.8px;margin-bottom:11px}
-.mentor-award-copy>h3{font-size:clamp(24px,2.5vw,34px);font-weight:500;line-height:1.2;letter-spacing:-1.2px}
+/* Original award artwork, framed alongside the training expertise it recognises. */
+.mentor-recognition{position:relative;isolation:isolate;overflow:hidden;display:grid;grid-template-columns:minmax(0,1.55fr) minmax(0,1fr);align-items:center;gap:36px;margin-top:24px;padding:24px 34px 24px 24px;background:#091b46;border:1px solid #1d3962;border-radius:20px;color:#f6f8fc}
+.mentor-award-banner{display:block;width:100%;height:auto;border-radius:11px;border:1px solid #ffffff24}
+.mentor-award-copy{min-width:0;padding-block:10px}
+.mentor-award-copy>.eyebrow{color:#9fcaff;font-size:8px;letter-spacing:1.5px;margin-bottom:15px}
+.mentor-award-copy>h3{font-size:clamp(24px,2.5vw,36px);font-weight:500;line-height:1.2;letter-spacing:-1.2px}
 .mentor-award-copy>h3>span{color:#76c2ff}
-.mentor-award-copy>p:last-child{color:#b9cce5;font-size:12px;line-height:1.8;max-width:490px;margin-top:12px}
-.mentor-recognition>.text-link{color:#e5f1ff;font-size:11px;white-space:nowrap;border-color:#7f9cbd70}
-.mentor-recognition>.text-link:hover{color:#9fcaff}
-@media(max-width:1050px){.mentor-recognition{grid-template-columns:155px minmax(0,1fr);gap:27px;padding:30px}.mentor-recognition>.text-link{grid-column:2;justify-self:start;margin-top:-8px}.mentor-award-mark{grid-row:1/3;padding-right:17px}}
-@media(max-width:700px){.mentor-recognition{grid-template-columns:1fr;padding:28px 25px;gap:23px;border-radius:16px;margin-top:20px}.mentor-award-mark{grid-row:auto;grid-template-columns:37px auto auto;justify-content:start;column-gap:14px;padding:0 0 21px;border-right:0;border-bottom:1px solid #ffffff24}.mentor-award-star{grid-row:auto;font-size:41px}.mentor-award-mark>span:nth-child(2){font-size:8px}.mentor-award-mark>strong{font-size:27px;margin-left:9px}.mentor-award-copy>h3{font-size:29px}.mentor-award-copy>p:last-child{font-size:13px}.mentor-recognition>.text-link{grid-column:auto;justify-self:start;margin-top:0;font-size:11px}}
+.mentor-award-copy>.mentor-award-status{font-size:8px;font-weight:600;line-height:1.8;letter-spacing:.7px;color:#c4dcf7;margin-top:12px}
+.mentor-award-copy>p:not(.eyebrow):not(.mentor-award-status){color:#b9cce5;font-size:12px;line-height:1.8;max-width:430px;margin-top:17px}
+.mentor-award-copy>.text-link{color:#e5f1ff;font-size:11px;margin-top:17px;border-color:#7f9cbd70}
+.mentor-award-copy>.text-link:hover{color:#9fcaff}
+@media(max-width:1050px){.mentor-recognition{grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:25px;padding:23px}.mentor-award-copy>.eyebrow{font-size:7px;letter-spacing:1px}.mentor-award-copy>h3{font-size:28px}}
+@media(max-width:700px){.mentor-recognition{grid-template-columns:1fr;gap:22px;padding:16px;border-radius:18px;margin-top:20px}.mentor-award-banner{border-radius:9px}.mentor-award-copy{padding:0 8px 9px}.mentor-award-copy>.eyebrow{font-size:7px;letter-spacing:1.2px;margin-bottom:14px}.mentor-award-copy>h3{font-size:30px}.mentor-award-copy>.mentor-award-status{font-size:8px}.mentor-award-copy>p:not(.eyebrow):not(.mentor-award-status){font-size:13px;margin-top:15px}.mentor-award-copy>.text-link{margin-top:15px}}
