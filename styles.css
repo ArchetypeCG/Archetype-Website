@@ -779,32 +779,15 @@ h1 .serif-word{color:#a2cfff}
 @media(max-width:700px){.homepage-editorial-frame{height:350px}.homepage-editorial-frame>img{object-position:52% center;opacity:.86}.homepage-editorial>figcaption{margin-top:11px;padding-inline:7px}}
 @media(max-width:370px){.homepage-editorial-frame{height:310px}.homepage-editorial>figcaption{padding-inline:4px}}
 
-/* Original vector artwork derived from Archetype's own layered brand symbol. */
-.archetype-brand-art{margin:0;position:relative;min-width:0;align-self:center}
-.archetype-brand-svg{display:block;width:100%;height:auto;overflow:visible;aspect-ratio:600/550}
-.brand-art-wordmark{font-family:var(--display);font-size:33px;font-weight:700;letter-spacing:-1.6px;fill:#ecf5ff}
-.brand-art-subtitle{font-family:var(--sans);font-size:5px;font-weight:500;letter-spacing:1.45px;fill:#a9cfff}
-.brand-art-annotations text{font-family:var(--sans);font-size:10px;font-weight:400;letter-spacing:.1px;fill:#bfd8f8}
-.archetype-brand-art>figcaption{display:flex;justify-content:space-between;align-items:center;gap:18px;border-top:1px solid #adceff20;padding-top:18px;margin-top:0;color:#a9c9ef}
-.archetype-brand-art>figcaption>span{font-size:6px;font-weight:500;letter-spacing:1.2px;line-height:1.8}
-.archetype-brand-art>figcaption>a{display:flex;align-items:center;gap:15px;font-size:10px;color:#d5e6ff;line-height:1.8}
-.archetype-brand-art>figcaption>a>span{font-size:18px;color:#87bfff}
-.archetype-brand-art>figcaption>a:hover{color:#92caff}
-@media(max-width:1150px){.brand-art-annotations text{font-size:11px}.archetype-brand-art>figcaption{gap:14px;padding-top:16px}.archetype-brand-art>figcaption>span{font-size:5px;letter-spacing:.9px}.archetype-brand-art>figcaption>a{font-size:9px;gap:10px}}
-@media(max-width:900px){.archetype-brand-art>figcaption{display:block;padding-top:14px}.archetype-brand-art>figcaption>span{display:block;margin-bottom:9px;font-size:6px;letter-spacing:1px}.archetype-brand-art>figcaption>a{font-size:10px;gap:17px}.brand-art-annotations text{font-size:12px}}
-@media(max-width:700px){.archetype-brand-art{margin-top:-5px}.brand-art-wordmark{font-size:35px}.brand-art-subtitle{font-size:6px;letter-spacing:1.25px}.brand-art-annotations text{font-size:13px;letter-spacing:0}.archetype-brand-art>figcaption{display:block;padding-top:18px;margin-top:8px}.archetype-brand-art>figcaption>span{font-size:6px;letter-spacing:1.2px;margin-bottom:10px}.archetype-brand-art>figcaption>a{font-size:11px;gap:17px}}
-@media(max-width:370px){.brand-art-annotations text{font-size:14px}.archetype-brand-art>figcaption>a{font-size:10px}}
-
-/* Original award artwork, framed alongside the training expertise it recognises. */
-.mentor-recognition{position:relative;isolation:isolate;overflow:hidden;display:grid;grid-template-columns:minmax(0,1.55fr) minmax(0,1fr);align-items:center;gap:36px;margin-top:24px;padding:24px 34px 24px 24px;background:#091b46;border:1px solid #1d3962;border-radius:20px;color:#f6f8fc}
-.mentor-award-banner{display:block;width:100%;height:auto;border-radius:11px;border:1px solid #ffffff24}
-.mentor-award-copy{min-width:0;padding-block:10px}
-.mentor-award-copy>.eyebrow{color:#9fcaff;font-size:8px;letter-spacing:1.5px;margin-bottom:15px}
-.mentor-award-copy>h3{font-size:clamp(24px,2.5vw,36px);font-weight:500;line-height:1.2;letter-spacing:-1.2px}
-.mentor-award-copy>h3>span{color:#76c2ff}
-.mentor-award-copy>.mentor-award-status{font-size:8px;font-weight:600;line-height:1.8;letter-spacing:.7px;color:#c4dcf7;margin-top:12px}
-.mentor-award-copy>p:not(.eyebrow):not(.mentor-award-status){color:#b9cce5;font-size:12px;line-height:1.8;max-width:430px;margin-top:17px}
-.mentor-award-copy>.text-link{color:#e5f1ff;font-size:11px;margin-top:17px;border-color:#7f9cbd70}
-.mentor-award-copy>.text-link:hover{color:#9fcaff}
-@media(max-width:1050px){.mentor-recognition{grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:25px;padding:23px}.mentor-award-copy>.eyebrow{font-size:7px;letter-spacing:1px}.mentor-award-copy>h3{font-size:28px}}
-@media(max-width:700px){.mentor-recognition{grid-template-columns:1fr;gap:22px;padding:16px;border-radius:18px;margin-top:20px}.mentor-award-banner{border-radius:9px}.mentor-award-copy{padding:0 8px 9px}.mentor-award-copy>.eyebrow{font-size:7px;letter-spacing:1.2px;margin-bottom:14px}.mentor-award-copy>h3{font-size:30px}.mentor-award-copy>.mentor-award-status{font-size:8px}.mentor-award-copy>p:not(.eyebrow):not(.mentor-award-status){font-size:13px;margin-top:15px}.mentor-award-copy>.text-link{margin-top:15px}}
+/* Award recognition takes the homepage's right-hand visual position. */
+.hero-award{margin:0;min-width:0;align-self:center;overflow:hidden;border:1px solid #aecfff35;border-radius:20px;background:#091b4699;box-shadow:0 24px 65px #071a3e24}
+.hero-award>img{display:block;width:100%;height:auto;border-bottom:1px solid #aecfff28}
+.hero-award>figcaption{padding:29px 32px 30px}
+.hero-award .eyebrow{color:#a8d1ff;font-size:8px;letter-spacing:1.5px;margin-bottom:17px}
+.hero-award h2{font-size:clamp(29px,3vw,43px);line-height:1.15;letter-spacing:-1.6px;font-weight:500;color:#f5f9ff}
+.hero-award h2 .serif-word{color:#a8d1ff}
+.hero-award figcaption>p:not(.eyebrow){font-size:12px;line-height:1.8;color:#bdd3ee;margin-top:18px}
+.hero .hero-award .text-link{color:#e2efff;font-size:10px;margin-top:18px;gap:22px;border-color:#9abce455}
+.hero .hero-award .text-link:hover{color:#95c9ff}
+@media(max-width:1050px){.hero-award>figcaption{padding:23px}.hero-award .eyebrow{font-size:7px;letter-spacing:.9px}.hero-award h2{font-size:32px}.hero .hero-award .text-link{font-size:9px;gap:13px}}
+@media(max-width:700px){.hero-award{border-radius:17px}.hero-award>figcaption{padding:25px}.hero-award h2{font-size:35px}.hero-award .eyebrow{font-size:7px;letter-spacing:1px}.hero-award figcaption>p:not(.eyebrow){font-size:13px}.hero .hero-award .text-link{font-size:10px;gap:15px}}
